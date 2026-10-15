@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>US 117078 — Agentes Digitais V8.4</title>
+<style>
+:root{
+  --green:#2f8f25; --green-dark:#087f50; --green-soft:#eef7ed; --green-border:#cfe0cc;
+  --orange:#e88b2d; --orange-soft:#fff1df; --ink:#26372c; --muted:#6b786f; --line:#dfe7df;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:12px Arial,Helvetica,sans-serif}
+.topbar{background:#06945e;color:#fff;padding:8px max(14px,calc((100vw - 980px)/2 + 14px));display:flex;justify-content:space-between;align-items:center}
+.topbar b{font-size:13px}.topbar small{opacity:.9}
+.nav{background:#087d4f;color:#fff;padding:6px max(14px,calc((100vw - 980px)/2 + 14px));font-size:10px;white-space:nowrap;overflow:auto}.nav span{margin-right:16px}
+main{max-width:980px;margin:0 auto;padding:10px 14px 28px}
+.crumb{font-size:10px;color:#8a918c}.title{font-size:22px;color:#d17a1f;margin:4px 0 1px}.subtitle{margin:0 0 10px;color:#8a918c;font-size:10px}
+.singular-row{display:grid;grid-template-columns:1fr auto auto;gap:9px;align-items:end;margin-bottom:11px}.field{display:grid;gap:4px}.field label,.label{font-weight:700;font-size:11px}
+input,select,textarea{font:inherit;border:1px solid #bfcac1;background:#fff;border-radius:2px;padding:6px;color:var(--ink)}input:disabled{background:#eef1ee;color:#5c685f}
+.badge{padding:7px 9px;border:1px solid #cfe3d1;background:#eef8ee;color:#2f7a31;border-radius:2px;font-size:10px;font-weight:700;white-space:nowrap}.badge.warn{background:#fff6e8;border-color:#efd8aa;color:#a96d1f}
+.panel{border:1px solid var(--line);background:#fff;margin-bottom:11px}.panel-title{background:var(--green);color:#fff;padding:7px 10px;font-weight:700;font-size:11px}.panel-body{padding:9px 10px}
+.resources-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:12px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.metric{border:1px solid var(--green-border);background:#eef7ec;padding:8px 9px}.metric.orange{background:var(--orange-soft);border-color:#f2d0a7}.metric small{display:block;color:#47704c;margin-bottom:2px;font-size:9px}.metric strong{display:block;color:#1f7133;font-size:17px}.metric.orange strong{color:#b15d0d}.contract-date{margin-top:6px;border:1px solid var(--green-border);background:#f7faf7;padding:6px 8px;font-size:9.5px}.contract-date b{color:#27743a}
+.section-label{font-weight:700;font-size:10.5px;margin:8px 0 5px}.meter{height:9px;background:#2f9d47;display:flex;overflow:hidden}.meter-used{width:91.67%;background:var(--orange)}.meter-remaining{flex:1;background:#2f9d47}.legend{display:flex;justify-content:space-between;gap:10px;font-size:9.5px;margin-top:4px}.orange-dot{color:var(--orange)}.green-dot{color:#258c42}.help{font-size:9px;color:var(--muted);line-height:1.35}.note{margin-top:6px;background:#fff8eb;border-left:3px solid #d59a35;padding:6px 8px;font-size:9.5px;line-height:1.32}
+.message-box textarea{min-height:88px;resize:vertical;width:100%}.message-box .label{display:block;margin-bottom:4px}.channel-checks{display:flex;gap:10px;flex-wrap:wrap;margin:5px 0 7px}.channel-checks label{display:flex;gap:4px;align-items:center;font-size:9.5px}.rte-toolbar{display:flex;gap:4px;margin-bottom:4px}.rte-toolbar button{min-width:27px;padding:4px 6px;border:1px solid #bfcac1;background:#f7f9f7;cursor:pointer;font-weight:700}.rte{min-height:88px;border:1px solid #bfcac1;background:#fff;padding:7px;line-height:1.35;overflow:auto}.schedule-box{border:1px solid #dfe7df;border-radius:2px;padding:8px 9px;margin-top:5px}.schedule-head,.schedule-row{display:grid;grid-template-columns:74px 1fr 1fr 48px;gap:8px;align-items:center}.schedule-head{font-weight:700;font-size:10px;color:#334139;margin-bottom:4px}.schedule-row{padding:3px 0}.schedule-row .day{font-weight:700}.schedule-row input[type="time"]{width:100%;padding:5px 6px}.switch{position:relative;display:inline-block;width:42px;height:22px}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;cursor:pointer;inset:0;background:#cfd4d0;border-radius:999px;transition:.2s}.slider:before{content:"";position:absolute;height:16px;width:16px;left:3px;top:3px;background:white;border-radius:50%;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.2)}.switch input:checked + .slider{background:#68bf7f}.switch input:checked + .slider:before{transform:translateX(20px)}.singular-compact{max-width:360px}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:7px}.feature{background:#f5faf4;border:1px solid #dcebd9;padding:6px 7px;font-size:9.5px}.feature:before{content:'✓';color:#247a31;font-weight:700;margin-right:4px}
+.middle-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:10px;margin-bottom:11px}.middle-grid .panel{margin-bottom:0}.checks-inline{display:flex;gap:13px;flex-wrap:wrap}.checks-inline label,.radio-line label{display:flex;gap:5px;align-items:center;font-size:9.5px}.radio-line{display:flex;gap:14px;flex-wrap:wrap;margin:5px 0}.compact-input{max-width:180px}.full-btn{width:100%;margin-top:7px}.btn{border:1px solid var(--green-dark);background:#fff;color:#166f48;padding:7px 12px;border-radius:2px;font-weight:700;cursor:pointer;font-size:10px}.btn.primary{background:#0b8d58;color:#fff}.btn:disabled{opacity:.45;cursor:not-allowed}
+.param-list{margin-top:7px}.param-item{display:flex;gap:6px;align-items:center;margin:6px 0;font-size:9.5px}.add-btn{margin:6px 0 4px}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 18px}.menu-item{display:flex;gap:6px;align-items:center;padding:4px 0;font-size:9.5px}.menu-item input{accent-color:#0b8d58}
+.plan-wide{max-width:930px;margin:0 auto 11px}.orange-divider{height:0;border-top:3px solid var(--orange);margin:16px 0 12px}.plan-compact-select{max-width:395px}.plan-change-btn{width:230px;max-width:100%;margin-top:7px}.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.mini{background:#f6faf5;border:1px solid #dce9db;padding:7px}.mini small{display:block;color:#68756b;font-size:9px;margin-bottom:2px}.mini strong{color:#27743a;font-size:14px}.plan-features{display:grid;grid-template-columns:repeat(2,1fr);gap:4px}.plan-feature{background:#f6faf5;border:1px solid #e0ece0;padding:5px 6px;font-size:9.5px}.plan-feature:before{content:'✓';color:#247a31;font-weight:700;margin-right:4px}
+.actions{display:flex;gap:10px;margin-top:14px;margin-left:72px}.actions .btn{min-width:160px}
+.feedback{display:none;margin-top:8px;padding:7px;border:1px solid #cfe4d1;background:#f2faf2;font-size:10px}.feedback.error{background:#fff1f1;border-color:#e8baba;color:#a12828}
+.modal-back{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal{background:#fff;width:min(430px,100%);border-radius:4px;overflow:hidden}.modal h3{margin:0;background:var(--green);color:#fff;padding:9px 11px;font-size:13px}.modal .content{padding:14px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+@media(max-width:760px){.singular-row,.resources-grid,.middle-grid{grid-template-columns:1fr}.features,.menu-grid,.mini-grid,.plan-features{grid-template-columns:repeat(2,1fr)}.actions{margin-left:0}.actions .btn{min-width:0;flex:1}}
+@media(max-width:480px){.metrics,.features,.menu-grid,.mini-grid,.plan-features{grid-template-columns:1fr}.actions{flex-direction:column}.actions .btn{width:100%}}
+</style>
+</head>
+<body>
+<div class="topbar"><b>Unimed | ADM</b><small>Administrador</small></div>
+<div class="nav"><span>Gestão</span><span>Integração</span><span>Cadastros</span><span>Atendimento</span><span>Usuários</span><span>Financeiro</span><span>Guia Médico</span><span>Assistentes Virtuais</span><span>Relatórios</span><span>Notificações</span></div>
+<main>
+  <div class="crumb">Agentes digitais</div>
+  <h1 class="title">Agentes digitais</h1>
+  <p class="subtitle">Agentes digitais para atendimento</p>
+
+  <div class="singular-row">
+    <div class="field singular-compact"><label>Singular vinculada</label><select id="singularSelect"><option>0999 — Unimed do Brasil (demonstração)</option><option>0082 — Singular de demonstração 2</option></select><div class="help">Quando o usuário possui apenas uma singular autorizada, o campo é exibido bloqueado. Com mais de uma singular autorizada, a seleção fica disponível conforme as permissões atuais do ADM.</div></div>
+    <div class="badge">Plano atual: <span id="headerPlan">Essencial</span></div>
+    <div class="badge warn">Dados de demonstração</div>
+  </div>
+
+  <section class="panel">
+    <div class="panel-title">Recursos do Plano Atual</div>
+    <div class="panel-body">
+      <div class="resources-grid">
+        <div>
+          <div class="metrics">
+            <div class="metric"><small>Conversas contratadas</small><strong>30.000</strong></div>
+            <div class="metric orange"><small>Conversas utilizadas</small><strong>27.502</strong></div>
+            <div class="metric"><small>Conversas disponíveis</small><strong>2.498</strong></div>
+          </div>
+          <div class="contract-date"><b>Data da contratação:</b> <span id="contractDate">15/09/2026</span></div>
+          <div class="section-label">Consumo da franquia mensal</div>
+          <div class="meter"><div class="meter-used" title="Consumido"></div><div class="meter-remaining" title="Disponível"></div></div>
+          <div class="legend"><span><span class="orange-dot">●</span> Consumidas: <b>91,67%</b></span><span><span class="green-dot">●</span> Disponíveis: <b>8,33%</b></span></div>
+          <div class="help">Última atualização: <span id="updatedAt"></span> • atualização automática na abertura da tela.</div>
+          <div class="note">Ao atingir a franquia, apresentar a mensagem de indisponibilidade e orientar o beneficiário a entrar em contato com a Unimed do seu plano. Detalhes técnicos de bloqueio/encerramento dependem de validação.</div>
+        </div>
+        <div class="message-box">
+          <span class="label">Mensagem de indisponibilidade da Singular</span>
+          <div class="section-label" style="margin-top:2px">Canais em que a mensagem será apresentada</div>
+          <div class="channel-checks">
+            <label><input type="checkbox" id="msgWhatsapp" checked> WhatsApp</label>
+            <label><input type="checkbox" id="msgApp" checked> APP</label>
+            <label><input type="checkbox" id="msgWeb" checked> WEBCHAT</label>
+          </div>
+          <div class="rte-toolbar" aria-label="Ferramentas de formatação">
+            <button type="button" data-cmd="bold" title="Negrito">B</button>
+            <button type="button" data-cmd="italic" title="Itálico"><i>I</i></button>
+            <button type="button" data-cmd="insertUnorderedList" title="Lista">•</button>
+          </div>
+          <div id="unavailable" class="rte" contenteditable="true">No momento, o atendimento pelo Agente Virtual está indisponível. Entre em contato com a Unimed do seu plano para obter atendimento.</div>
+          <div class="help">Texto em rich text, editável por usuário autorizado. Os canais de aplicação são definidos acima.</div>
+        </div>
+      </div>
+
+      <div class="features" id="contractedFeatures"></div>
+      <div class="help" style="margin-top:5px">Funcionalidades contratadas são exibidas diretamente, sem expansão.</div>
+    </div>
+  </section>
+
+  <div class="middle-grid">
+    <section class="panel">
+      <div class="panel-title">Transbordo — Contratação ou alteração de plano</div>
+      <div class="panel-body">
+        <div class="field"><label>Plano de transbordo</label>
+          <select id="transPlan">
+            <option value="essencial">Opção de transbordo B — Essencial</option>
+            <option value="avancado">Opção de transbordo B — Avançado</option>
+            <option value="premium">Opção de transbordo B — Premium</option>
+          </select>
+        </div>
+        <div class="section-label">Situação contratual</div>
+        <input id="transStatus" disabled value="Contratado (demonstração)" style="width:100%">
+
+        <div class="section-label">Canais contemplados</div>
+        <div class="checks-inline">
+          <label><input type="checkbox" id="tpWhatsapp" disabled> WhatsApp</label>
+          <label><input type="checkbox" id="tpApp" disabled> APP</label>
+          <label><input type="checkbox" id="tpWeb" disabled> WEBCHAT</label>
+        </div>
+        <div class="section-label">Horário de funcionamento do atendimento</div>
+        <div class="schedule-box">
+          <div class="schedule-head"><div></div><div>Início do atendimento</div><div>Fim do atendimento</div><div></div></div>
+          <div class="schedule-row"><div class="day">Domingo</div><input type="time" value="01:00"><input type="time" value="23:00"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+          <div class="schedule-row"><div class="day">Segunda</div><input type="time" value=""><input type="time" value=""><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+          <div class="schedule-row"><div class="day">Terça</div><input type="time" value="02:00"><input type="time" value="11:00"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+          <div class="schedule-row"><div class="day">Quarta</div><input type="time" value=""><input type="time" value=""><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+          <div class="schedule-row"><div class="day">Quinta</div><input type="time" value=""><input type="time" value=""><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+          <div class="schedule-row"><div class="day">Sexta</div><input type="time" value=""><input type="time" value=""><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+          <div class="schedule-row"><div class="day">Sábado</div><input type="time" value=""><input type="time" value=""><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+        </div>
+        <div class="help">Horário associado ao transbordo para atendimento humano.</div>
+        <div class="help" style="margin-top:6px">Estes canais refletem o plano comercial de transbordo. A habilitação operacional continua independente.</div>
+        <div class="note" id="transWarning">Valores, regras de contratação e vigência são demonstrativos para o protótipo.</div>
+        <button class="btn primary full-btn" id="changeTransPlan">Contratar / alterar plano de transbordo</button>
+
+        <div class="section-label" style="border-top:1px solid #e3e7e3;padding-top:8px">Limite mensal acumulado para transbordo</div>
+        <div class="radio-line">
+          <label><input type="radio" name="limitMode" value="plan" checked> Limite do plano</label>
+          <label><input type="radio" name="limitMode" value="custom"> Customizado</label>
+        </div>
+        <div class="field compact-input"><label>Quantidade de conversas</label><input id="customLimit" type="number" min="1" value="3500" disabled></div>
+        <div class="note" style="background:#eff8ef;border-left-color:#2f8f25">Quantidade relacionada ao limite para o mês de utilização do transbordo. Fonte e cálculo dos dados permanecem pendentes de validação técnica.</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">Parâmetros adicionais dos Agentes Digitais</div>
+      <div class="panel-body">
+        <div class="section-label" style="margin-top:0">Parâmetros</div>
+        <label class="param-item"><input type="checkbox" id="historyEnabled" checked> Habilitar envio de histórico</label>
+        <div class="help">Novos parâmetros podem ser adicionados abaixo, mantendo a estrutura da tela.</div>
+        <button class="btn add-btn" id="addParam">+ Adicionar novo parâmetro</button>
+        <div class="param-list" id="paramList">
+          <label class="param-item"><input type="checkbox"> Parâmetro adicional demonstrativo 1</label>
+          <label class="param-item"><input type="checkbox" checked> Parâmetro adicional demonstrativo 2</label>
+          <label class="param-item"><input type="checkbox"> Parâmetro adicional demonstrativo 3</label>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel">
+    <div class="panel-title">Cardápio de funcionalidades disponíveis para habilitar</div>
+    <div class="panel-body">
+      <div class="menu-grid" id="menuGrid"></div>
+      <div class="help" style="margin-top:5px">Funcionalidades demonstrativas. Na implementação, os nomes e parâmetros existentes deverão ser preservados.</div>
+    </div>
+  </section>
+
+  <div class="orange-divider"></div>
+  <section class="panel plan-wide">
+    <div class="panel-title" style="font-size:14px">Planos disponíveis para contratação</div>
+    <div class="panel-body">
+      <div class="field plan-compact-select"><label>Selecione um plano para consultar</label>
+        <select id="planSelect">
+          <option value="essencial">Essencial</option>
+          <option value="avancado">Avançado</option>
+          <option value="premium" selected>Premium (exemplo)</option>
+        </select>
+      </div>
+      <div class="help">Plano demonstrativo para alteração</div>
+      <div class="section-label">Informações do plano selecionado</div>
+      <div class="mini-grid">
+        <div class="mini"><small>Limite de conversas</small><strong id="planLimit"></strong></div>
+        <div class="mini"><small>Preço por conversa excedente</small><strong id="planPrice"></strong></div>
+        <div class="mini"><small>Licenças Analytics</small><strong id="planLicenses"></strong></div>
+      </div>
+      <div class="section-label">Funcionalidades incluídas no plano</div>
+      <div class="plan-features" id="planFeatures"></div>
+      <div class="help" style="margin-top:6px">Planos, valores e funcionalidades exemplificativos, preservando o padrão visual para validação.</div>
+      <button class="btn primary plan-change-btn" id="changePlan">Alterar para este plano</button>
+    </div>
+  </section>
+
+  <div id="feedback" class="feedback" role="status"></div>
+  <div class="actions">
+    <button class="btn primary" id="save">Salvar</button>
+    <button class="btn" id="cancel">Cancelar</button>
+  </div>
+</main>
+
+<div class="modal-back" id="modalBack">
+  <div class="modal">
+    <h3 id="modalTitle">Confirmar alteração</h3>
+    <div class="content">
+      <p id="modalText"></p>
+      <div class="modal-actions"><button class="btn" id="dismiss">Voltar</button><button class="btn primary" id="confirm">Confirmar</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const plans={
+  essencial:{name:'Essencial',limit:'5.000',price:'R$ 3,40',licenses:'5',features:['Cartão virtual','Guia médico','Consulta de protocolos']},
+  avancado:{name:'Avançado',limit:'10.000',price:'R$ 2,90',licenses:'10',features:['Cartão virtual','Guia médico','Consulta de protocolos','Extrato de utilização','Perguntas frequentes (FAQ)']},
+  premium:{name:'Premium',limit:'20.000',price:'R$ 2,60',licenses:'20',features:['Cartão virtual','Guia médico','Consulta de protocolos','Extrato de utilização','Perguntas frequentes (FAQ)','Solicitação de reembolso']}
+};
+const transPlans={
+  essencial:{name:'Opção de transbordo B — Essencial',status:'Contratado (demonstração)',channels:['WhatsApp','APP'],limit:3500},
+  avancado:{name:'Opção de transbordo B — Avançado',status:'Disponível para alteração',channels:['WhatsApp','APP','WEBCHAT'],limit:7000},
+  premium:{name:'Opção de transbordo B — Premium',status:'Disponível para alteração',channels:['WhatsApp','APP','WEBCHAT'],limit:12000}
+};
+const contracted=['Guia Médico','Cartão virtual','Chat médico','Extrato de utilização','Pedido de cotação','Pesquisa localização (FAQ)','Consulta de autorização','Segunda via de boleto'];
+const menuNames=['Cartão virtual','Guia médico','Consulta de protocolo','Extrato de utilização','Extrato de coparticipação','Segunda via de boleto','Consulta de situação de autorização','Solicitação de liberação de guias','Atualização cadastral','Solicitação de reembolso','Pesquisa de satisfação','Perguntas frequentes (FAQ)'];
+let currentPlan='essencial', currentTransPlan='essencial', pending=null;
+
+function fillList(el,items,cls){el.replaceChildren(...items.map(t=>{const d=document.createElement('div');d.className=cls;d.textContent=t;return d}))}
+fillList($('contractedFeatures'),contracted,'feature');
+menuNames.forEach((name,i)=>{const l=document.createElement('label');l.className='menu-item';const c=document.createElement('input');c.type='checkbox';c.checked=i<8;l.append(c,document.createTextNode(name));$('menuGrid').append(l)});
+
+function renderPlan(){
+  const p=plans[$('planSelect').value];
+  $('planLimit').textContent=p.limit;
+  $('planPrice').textContent=p.price;
+  $('planLicenses').textContent=p.licenses;
+  fillList($('planFeatures'),p.features,'plan-feature');
+  $('changePlan').disabled=$('planSelect').value===currentPlan;
+  $('changePlan').textContent=$('planSelect').value===currentPlan?'Plano atual':'Alterar para este plano';
+}
+function renderTransPlan(){
+  const key=$('transPlan').value, p=transPlans[key];
+  $('transStatus').value=p.status;
+  $('tpWhatsapp').checked=p.channels.includes('WhatsApp');
+  $('tpApp').checked=p.channels.includes('APP');
+  $('tpWeb').checked=p.channels.includes('WEBCHAT');
+  $('transWarning').textContent='Plano selecionado: '+p.name+' • limite demonstrativo de '+p.limit.toLocaleString('pt-BR')+' conversas.';
+  $('changeTransPlan').disabled=key===currentTransPlan;
+  $('changeTransPlan').textContent=key===currentTransPlan?'Plano de transbordo atual':'Contratar / alterar plano de transbordo';
+  if(document.querySelector('input[name=limitMode]:checked').value==='plan') $('customLimit').value=p.limit;
+}
+function refreshLimit(){
+  const custom=document.querySelector('input[name=limitMode]:checked').value==='custom';
+  $('customLimit').disabled=!custom;
+  if(!custom){$('customLimit').value=transPlans[$('transPlan').value].limit;}
+}
+function show(msg,error=false){const f=$('feedback');f.textContent=msg;f.className='feedback'+(error?' error':'');f.style.display='block'}
+function openModal(title,text,cb){$('modalTitle').textContent=title;$('modalText').textContent=text;pending=cb;$('modalBack').style.display='flex'}
+function closeModal(){$('modalBack').style.display='none';pending=null}
+$('dismiss').onclick=closeModal;$('modalBack').addEventListener('click',e=>{if(e.target===$('modalBack'))closeModal()});
+$('confirm').onclick=()=>{const cb=pending;closeModal();if(cb)cb()};
+
+$('transPlan').addEventListener('change',()=>{renderTransPlan();refreshLimit()});
+$('planSelect').addEventListener('change',renderPlan);
+document.querySelectorAll('input[name=limitMode]').forEach(x=>x.addEventListener('change',refreshLimit));
+$('addParam').onclick=()=>{const n=$('paramList').children.length+1;const l=document.createElement('label');l.className='param-item';const c=document.createElement('input');c.type='checkbox';l.append(c,document.createTextNode(' Parâmetro adicional demonstrativo '+n));$('paramList').append(l)};
+$('changeTransPlan').onclick=()=>{const k=$('transPlan').value;if(k===currentTransPlan)return;openModal('Confirmar alteração do plano de transbordo','Deseja alterar o plano de transbordo para '+transPlans[k].name+'?',()=>{currentTransPlan=k;Object.keys(transPlans).forEach(x=>transPlans[x].status=x===k?'Contratado (demonstração)':'Disponível para alteração');renderTransPlan();show('Plano de transbordo alterado apenas nesta simulação.')})};
+$('changePlan').onclick=()=>{const k=$('planSelect').value;if(k===currentPlan)return;openModal('Confirmar alteração do plano','Deseja alterar o plano principal para '+plans[k].name+'?',()=>{currentPlan=k;$('headerPlan').textContent=plans[k].name;$('contractDate').textContent=new Date().toLocaleDateString('pt-BR');renderPlan();show('Plano principal alterado apenas nesta simulação.')})};
+$('save').onclick=()=>{if(!$('unavailable').innerText.trim()){show('Informe a mensagem de indisponibilidade.',true);return}if(document.querySelector('input[name=limitMode]:checked').value==='custom'&&Number($('customLimit').value)<1){show('Informe uma quantidade de conversas maior que zero.',true);return}openModal('Confirmar gravação','Deseja salvar as configurações?',()=>show('Configurações salvas apenas nesta simulação.'))};
+$('cancel').onclick=()=>openModal('Cancelar alterações','Deseja descartar as alterações não salvas?',()=>location.reload());
+document.querySelectorAll('.rte-toolbar button').forEach(b=>b.addEventListener('click',()=>{document.execCommand(b.dataset.cmd,false,null);$('unavailable').focus()}));
+$('updatedAt').textContent=new Date().toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});
+renderPlan();renderTransPlan();refreshLimit();
+</script>
+</body>
+</html>
